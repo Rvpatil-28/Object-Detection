@@ -1,0 +1,23 @@
+import torch
+from PIL import Image
+import matplotlib.pyplot as plt
+
+# Load the YOLOv5 model
+model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # Small YOLOv5 model
+
+# Load the image
+image_path = '54-545849_dinner-food-png-freeuse-stock-plate-of-food.png'  # Replace with the path to your image
+image = Image.open(image_path)
+
+# Perform object detection
+results = model(image)
+
+# Display the results
+results.show()  # Display image with bounding boxes
+
+# (Optional) Save results to a file
+results.save('output_folder/')  # Replace with your desired folder
+
+# Print detected objects
+print("Detected objects:")
+print(results.pandas().xyxy[0])  # Bounding boxes with labels
